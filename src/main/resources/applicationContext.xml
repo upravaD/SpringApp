@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="musicBean"
-          class="org.example.springApp.RockMusic">
+    <context:property-placeholder location="musicPlayer.properties"/>
+
+    <bean id="musicClassic"
+          class="org.example.springApp.ClassicalMusic"/>
+    <bean id="musicRock"
+          class="org.example.springApp.RockMusic"/>
+    <bean id="musicRap"
+          class="org.example.springApp.RapMusic"/>
+
+    <util:list id="listBean" value-type="org.example.springApp.Music">
+        <ref bean="musicClassic"/>
+        <ref bean="musicRock"/>
+        <ref bean="musicRap"/>
+    </util:list>
+
+    <bean id="musicPlayer"
+          class="org.example.springApp.MusicPlayer">
+        <property name="musicList" ref="listBean"/>
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 
 </beans>
