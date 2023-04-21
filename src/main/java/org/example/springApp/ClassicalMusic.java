@@ -11,12 +11,12 @@ public class ClassicalMusic implements Music {
     }
 
     public void init() {
-        System.out.println("Initialization " + ClassicalMusic.class.getSimpleName() + " complete!");
+        System.out.println("Initialization " + this.getClass().getSimpleName() + " complete!");
         TestSpring.COUNT++;
     }
 
     public void destroy() {
-        System.out.println("Destruction " + ClassicalMusic.class.getSimpleName() + " complete!");
+        System.out.println("Destruction " + this.getClass().getSimpleName() + " complete!");
     }
 
     @Override

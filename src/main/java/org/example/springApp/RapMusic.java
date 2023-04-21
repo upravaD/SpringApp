@@ -5,4 +5,10 @@ public class RapMusic implements Music {
     public String getSong() {
         return "Rap";
     }
+
+    @Override
+    public void init() {
+        System.out.println("Initialization " + this.getClass().getSimpleName() + " complete!");
+        TestSpring.COUNT++;
+    }
 }

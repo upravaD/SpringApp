@@ -36,6 +36,8 @@ public class TestSpring {
         System.out.println("=".repeat(50));
         for (int i = 0; i < new Random().nextInt(5); i++) {
             context.getBean("musicClassic", ClassicalMusic.class);
+            context.getBean("musicRock", RockMusic.class);
+            context.getBean("musicRap", RapMusic.class);
         }
         System.out.println("COUNT_INIT = " + COUNT);
 

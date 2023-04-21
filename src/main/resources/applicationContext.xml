@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+
+<beans default-init-method="init"
+
+       xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
@@ -21,10 +24,12 @@
     </bean>
 
     <bean id="musicRock"
-          class="org.example.springApp.RockMusic"/>
+          class="org.example.springApp.RockMusic"
+          scope="prototype"/>
 
     <bean id="musicRap"
-          class="org.example.springApp.RapMusic"/>
+          class="org.example.springApp.RapMusic"
+          scope="prototype"/>
 
     <util:list id="listBean"
                value-type="org.example.springApp.Music">
