@@ -11,23 +11,37 @@
     <context:property-placeholder location="musicPlayer.properties"/>
 
     <bean id="musicClassic"
-          class="org.example.springApp.ClassicalMusic"/>
+          class="org.example.springApp.ClassicalMusic"
+          init-method="init"
+          destroy-method="destroy"
+          scope="prototype"
+          factory-method="getClassicFactory">
+        <property name="song"
+                  value="${classicMusic.song}"/>
+    </bean>
+
     <bean id="musicRock"
           class="org.example.springApp.RockMusic"/>
+
     <bean id="musicRap"
           class="org.example.springApp.RapMusic"/>
 
-    <util:list id="listBean" value-type="org.example.springApp.Music">
+    <util:list id="listBean"
+               value-type="org.example.springApp.Music">
         <ref bean="musicClassic"/>
         <ref bean="musicRock"/>
         <ref bean="musicRap"/>
     </util:list>
 
     <bean id="musicPlayer"
-          class="org.example.springApp.MusicPlayer">
-        <property name="musicList" ref="listBean"/>
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
+          class="org.example.springApp.MusicPlayer"
+          scope="prototype">
+        <property name="musicList"
+                  ref="listBean"/>
+        <property name="name"
+                  value="${musicPlayer.name}"/>
+        <property name="volume"
+                  value="${musicPlayer.volume}"/>
     </bean>
 
 </beans>
