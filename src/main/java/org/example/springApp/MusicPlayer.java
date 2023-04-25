@@ -1,18 +1,28 @@
 package org.example.springApp;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("prototype")
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
+    private Music classicalMusic;
+    private Music rockMusic;
+    private Music rapMusic;
     private String name;
     private int volume;
 
     public MusicPlayer() {
     }
-
-    public MusicPlayer(List<Music> musicList) {
-        this.musicList = musicList;
+    @Autowired
+    public MusicPlayer(@Qualifier("musicClassic") Music classicalMusic,
+                       @Qualifier("musicRock") Music rockMusic,
+                       @Qualifier("musicRap") Music rapMusic) {
+        this.classicalMusic = classicalMusic;
+        this.rockMusic = rockMusic;
+        this.rapMusic = rapMusic;
     }
 
     public String getName() {
@@ -27,12 +37,12 @@ public class MusicPlayer {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
 
-    public void playMusic() {
-        System.out.println("Playing: ");
-        musicList.forEach(System.out::println);
+    public void playMusic(Genre genre) {
+        switch (genre) {
+            case RAP -> System.out.println("Playing: " + rapMusic.getSong());
+            case ROCK -> System.out.println("Playing: " + rockMusic.getSong());
+            case CLASSICAL -> System.out.println("Playing: " + classicalMusic.getSong());
+        }
     }
 }

@@ -9,44 +9,49 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:property-placeholder location="musicPlayer.properties"/>
+    <context:component-scan base-package="org.example.springApp"/>
 
-    <bean id="musicClassic"
-          class="org.example.springApp.ClassicalMusic"
-          init-method="init"
-          destroy-method="destroy"
-          scope="prototype"
-          factory-method="getClassicFactory">
-        <property name="song"
-                  value="${classicMusic.song}"/>
-    </bean>
+<!--Создание бинов вручную-->
 
-    <bean id="musicRock"
-          class="org.example.springApp.RockMusic"
-          scope="prototype"/>
+<!--    <bean id="musicClassic"-->
+<!--          class="org.example.springApp.ClassicalMusic"-->
+<!--          init-method="init"-->
+<!--          destroy-method="destroy"-->
+<!--          scope="prototype"-->
+<!--          factory-method="getClassicFactory">-->
+<!--        <property name="song"-->
+<!--                  value="${classicMusic.song}"/>-->
+<!--    </bean>-->
 
-    <bean id="musicRap"
-          class="org.example.springApp.RapMusic"
-          scope="prototype"/>
+<!--    <bean id="musicRock"-->
+<!--          class="org.example.springApp.RockMusic"-->
+<!--          scope="prototype"/>-->
 
-    <util:list id="listBean"
-               value-type="org.example.springApp.Music">
-        <ref bean="musicClassic"/>
-        <ref bean="musicRock"/>
-        <ref bean="musicRap"/>
-    </util:list>
+<!--    <bean id="musicRap"-->
+<!--          class="org.example.springApp.RapMusic"-->
+<!--          scope="prototype"/>-->
 
-    <bean id="musicPlayer"
-          class="org.example.springApp.MusicPlayer"
-          scope="prototype">
-        <property name="musicList"
-                  ref="listBean"/>
-        <property name="name"
-                  value="${musicPlayer.name}"/>
-        <property name="volume"
-                  value="${musicPlayer.volume}"/>
-    </bean>
+<!--    <util:list id="listBean"-->
+<!--               value-type="org.example.springApp.Music">-->
+<!--        <ref bean="musicClassic"/>-->
+<!--        <ref bean="musicRock"/>-->
+<!--        <ref bean="musicRap"/>-->
+<!--    </util:list>-->
+
+<!--    <bean id="musicPlayer"-->
+<!--          class="org.example.springApp.MusicPlayer"-->
+<!--          scope="prototype">-->
+<!--        <property name="musicList"-->
+<!--                  ref="listBean"/>-->
+<!--        <property name="name"-->
+<!--                  value="${musicPlayer.name}"/>-->
+<!--        <property name="volume"-->
+<!--                  value="${musicPlayer.volume}"/>-->
+<!--    </bean>-->
 
 </beans>
